@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from exercise.views import exercise_api
 from food.views import foodAPI
+from customer.views import customerAPI
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('exercise_api/',exercise_api,name= 'exercise_api'),
-    path('food_api/',foodAPI.as_view(),name= 'food_api')
+    path('food_api/',foodAPI.as_view(),name= 'food_api'),
+    path('customer_api/',customerAPI.as_view(),name= 'customer_api')
 ]
