@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from exercise.views import exercise_api
-
+from food.views import foodAPI
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('exercise_api/',exercise_api,name= 'exercise_api')
+    path('exercise_api/',exercise_api,name= 'exercise_api'),
+    path('food_api/',foodAPI.as_view(),name= 'food_api')
 ]

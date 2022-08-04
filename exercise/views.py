@@ -13,17 +13,16 @@ from rest_framework import decorators , response
 def exercise_api(request):
     if request.method == "GET":
         exercise_list =exerciseSerializers(exercise.objects.all(),many=True)
-        return JsonResponse({'data':exercise_list.data},status =200)
+        return response.Response(exercise_list.data,status =200)
     elif request.method == 'POST':
         data =request.data
-        print(data)
-
+        # print(data)
         exercise_ser = exerciseSerializers(data = data)
         if exercise_ser.is_valid():
             new_exercise = exercise_ser.save()
             return response.Response({'exercise_ser': new_exercise.id},status = 200)
         else:
-            return JsonResponse( {'exercise_ser': exercise_ser.errors},status = 400)
+            return response.Response( {'exercise_ser': exercise_ser.errors},status = 400)
         
 
 
