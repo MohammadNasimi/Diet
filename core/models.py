@@ -14,9 +14,7 @@ class User(AbstractUser):
         choices = CHOICES,
         default = '1'
         )
-    age = models.IntegerField(null=True, blank=True)
-    weight = models.IntegerField(null=True, blank=True)
-    height = models.IntegerField(null=True, blank=True)
+
 
     objects = MyUserManager()
 
