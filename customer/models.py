@@ -8,4 +8,4 @@ class customer(models.Model):
     weight = models.IntegerField(null=True, blank=True)
     height = models.IntegerField(null=True, blank=True)
     def __str__(self):
-        return f'{self.user.username}'
+        return f'{self.user}'

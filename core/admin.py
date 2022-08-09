@@ -13,9 +13,6 @@ class myUserAdmin(UserAdmin):
             'custom Field',
             {
                 'fields':(
-                'age',
-                'weight',
-                'height',
                 'kind_user',
                 )
             },
