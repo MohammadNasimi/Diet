@@ -25,5 +25,5 @@ urlpatterns = [
     path('exercise_api/',exercise_api,name= 'exercise_api'),
     path('food_api/',foodAPI.as_view(),name= 'food_api'),
     path('customer_api/',customerAPI.as_view(),name= 'customer_api'),
-    path('DietApi',DietApi.as_view(),name = 'diet_api')
+    path('diet_api',DietApi.as_view(),name = 'diet_api')
 ]
