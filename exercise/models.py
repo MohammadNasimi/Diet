@@ -14,3 +14,6 @@ class exercise_diet_user(models.Model):
     customer_exercise = models.ForeignKey(customer, on_delete=models.RESTRICT)
     exersise_field = models.ForeignKey(exercise,on_delete=models.RESTRICT)
     time_exercise_customer = models.IntegerField()
+
+    def __str__(self) -> str:
+        return f'{self.customer_exercise}{self.time_exercise_customer}'
