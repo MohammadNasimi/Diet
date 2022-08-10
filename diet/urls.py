@@ -17,7 +17,7 @@ import imp
 from django.contrib import admin
 from django.urls import path
 from exercise.views import exercise_api,exercise_diet_api
-from food.views import foodAPI
+from food.views import foodAPI ,food_diet_userApi
 from customer.views import customerAPI
 from Diet.views import DietApi
 urlpatterns = [
@@ -26,5 +26,7 @@ urlpatterns = [
     path('food_api/',foodAPI.as_view(),name= 'food_api'),
     path('customer_api/',customerAPI.as_view(),name= 'customer_api'),
     path('diet_api',DietApi.as_view(),name = 'diet_api'),
-    path('exercise_diet_user',exercise_diet_api.as_view(),name = 'exercise_diet_user')
+    path('exercise_diet_user',exercise_diet_api.as_view(),name = 'exercise_diet_user'),
+    path('food_diet_user',food_diet_userApi.as_view(),name = 'food_diet_user')
+
 ]
