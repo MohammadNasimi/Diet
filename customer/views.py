@@ -28,7 +28,6 @@ class customerAPI(generics.ListCreateAPIView):
         customer_create  = customer.objects.create(user = user,age = customer_data['age']
         ,weight=customer_data['weight'],height=customer_data['height'],
         BMI=bmi)
-        print(bmi)
         customer_create.save()
         # print(customer_data['user']['username'])
         # print(customer_data['age'])
