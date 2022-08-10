@@ -1,12 +1,13 @@
 import imp
+from operator import ge
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import is_valid_path
 from exercise.serializers import exerciseSerializers
-from exercise.models import exercise
+from exercise.models import exercise ,exercise_diet_user
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import decorators , response
-
+from rest_framework import decorators , response ,generics
+from exercise.serializers import exerciseSerializers,exercise_dietSerializers
 # Create your views here.
 @csrf_exempt
 @decorators.api_view(['GET','POST'])
@@ -24,5 +25,8 @@ def exercise_api(request):
         else:
             return response.Response( {'exercise_ser': exercise_ser.errors},status = 400)
         
+class exercise_diet_api(generics.ListCreateAPIView):
+    serializer_class = exercise_dietSerializers
+    queryset = exercise_diet_user.objects.all()
 
 
