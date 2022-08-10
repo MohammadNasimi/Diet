@@ -6,4 +6,4 @@ class customerSerializers(serializers.ModelSerializer):
     user = UserSerializers()
     class Meta:
         model= customer
-        fields = ['user','age','weight','height']
+        fields = ['user','age','weight','height','BMI']
