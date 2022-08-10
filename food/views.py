@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from rest_framework.decorators import APIView
-from rest_framework import response
+from rest_framework import response ,generics
 
-from food.serializers import foodSerializers
+from food.serializers import foodSerializers,food_diet_user_Serializers
 # Create your views here.
-from food.models import food
+from food.models import food ,food_diet_user
 class foodAPI(APIView):
     def get(self,request):
         food_serializer = foodSerializers(food.objects.all(),many = True)
@@ -18,3 +18,7 @@ class foodAPI(APIView):
             return response.Response({'foodSerializers': new_food.id},status = 200)
         else:
             return response.Response( {'foodSerializers': food_ser.errors},status = 400)
+
+class food_diet_userApi(generics.ListCreateAPIView):
+    serializer_class = food_diet_user_Serializers
+    queryset = food_diet_user.objects.all()
