@@ -24,8 +24,11 @@ class customerAPI(generics.ListCreateAPIView):
         user = User.objects.create_user(username=customer_data['user']['username'],
          password=customer_data['user']['password'],kind_user =customer_data['user']['kind_user'])
         user.save()
+        bmi =round(customer_data['height']/customer_data['weight'],2)
         customer_create  = customer.objects.create(user = user,age = customer_data['age']
-        ,weight=customer_data['weight'],height=customer_data['height'])
+        ,weight=customer_data['weight'],height=customer_data['height'],
+        BMI=bmi)
+        print(bmi)
         customer_create.save()
         # print(customer_data['user']['username'])
         # print(customer_data['age'])
