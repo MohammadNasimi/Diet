@@ -7,5 +7,6 @@ class customer(models.Model):
     age = models.IntegerField(null=True, blank=True)
     weight = models.IntegerField(null=True, blank=True)
     height = models.IntegerField(null=True, blank=True)
+    BMI  = models.IntegerField(null=True, blank=True)
     def __str__(self):
         return f'{self.user}'
