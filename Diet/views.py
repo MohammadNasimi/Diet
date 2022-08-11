@@ -16,5 +16,5 @@ class DietApi(generics.ListCreateAPIView):
 
 
         Diet_data = request.data
-        calculate(Diet_data)
+        print(calculate(Diet_data))
         return response.Response(serializer.data,status = 200)
