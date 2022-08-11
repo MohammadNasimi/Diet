@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from rest_framework import generics,response
-from Diet.models import Diet
+from Diet.models import Diet,Diet_admin
 from Diet.calculate_diet import calculate
 # Create your views here.
-from Diet.serializers import DietSerializers
+from Diet.serializers import DietSerializers,Diet_adminSerializers
 class DietApi(generics.ListCreateAPIView):  
 
     serializer_class = DietSerializers
@@ -18,3 +18,9 @@ class DietApi(generics.ListCreateAPIView):
         Diet_data = request.data
         print(calculate(Diet_data))
         return response.Response(serializer.data,status = 200)
+
+
+class Diet_adminApi(generics.ListCreateAPIView):  
+
+    serializer_class = Diet_adminSerializers
+    queryset = Diet_admin.objects.all()
