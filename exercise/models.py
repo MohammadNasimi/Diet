@@ -17,3 +17,11 @@ class exercise_diet_user(models.Model):
 
     def __str__(self) -> str:
         return f'{self.customer_exercise}{self.time_exercise_customer}'
+
+class exercise_diet_admin(models.Model):
+    admin_exercise = models.ForeignKey(customer, on_delete=models.RESTRICT)
+    exersise_field_admin = models.ForeignKey(exercise,on_delete=models.RESTRICT)
+    time_exercise_admin = models.IntegerField()
+
+    def __str__(self) -> str:
+        return f'{self.admin_exercise}{self.time_exercise_admin}'
