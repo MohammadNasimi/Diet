@@ -16,7 +16,7 @@ Including another URLconf
 import imp
 from django.contrib import admin
 from django.urls import path
-from exercise.views import exercise_api,exercise_diet_api
+from exercise.views import exercise_api, exercise_diet_admin_api,exercise_diet_api,exercise_diet_adminSerializers
 from food.views import foodAPI ,food_diet_userApi,food_diet_adminApi
 from customer.views import customerAPI
 from Diet.views import DietApi
@@ -28,5 +28,6 @@ urlpatterns = [
     path('diet_api',DietApi.as_view(),name = 'diet_api'),
     path('exercise_diet_user',exercise_diet_api.as_view(),name = 'exercise_diet_user'),
     path('food_diet_user',food_diet_userApi.as_view(),name = 'food_diet_user'),
-    path('food_diet_admin',food_diet_adminApi.as_view(),name ='food_diet_admin')
+    path('food_diet_admin',food_diet_adminApi.as_view(),name ='food_diet_admin'),
+    path('exercise_diet_admin',exercise_diet_admin_api.as_view(),name = 'exerciser_diet_admin')
 ]
