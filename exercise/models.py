@@ -16,7 +16,7 @@ class exercise_diet_user(models.Model):
     time_exercise_customer = models.IntegerField()
 
     def __str__(self) -> str:
-        return f'{self.customer_exercise}{self.time_exercise_customer}'
+        return f'{self.exersise_field}{self.time_exercise_customer}'
 
 class exercise_diet_admin(models.Model):
     admin_exercise = models.ForeignKey(customer, on_delete=models.RESTRICT)
@@ -24,4 +24,4 @@ class exercise_diet_admin(models.Model):
     time_exercise_admin = models.IntegerField()
 
     def __str__(self) -> str:
-        return f'{self.admin_exercise}{self.time_exercise_admin}'
+        return f'{self.exersise_field_admin}{self.time_exercise_admin}'

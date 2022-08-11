@@ -23,4 +23,4 @@ class food_diet_admin(models.Model):
     mesure_food_admin = models.IntegerField()
 
     def __str__(self) -> str:
-        return f'{self.admin_food},{self.mesure_food_admin}'
+        return f'{self.food_field_admin},{self.mesure_food_admin}'
