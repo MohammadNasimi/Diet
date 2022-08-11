@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from food.models import food ,food_diet_user
+from food.models import food ,food_diet_user, food_diet_admin
 
 # Register your models here.
 class foodAdmin(admin.ModelAdmin):
@@ -14,3 +14,9 @@ class food_diet_userAdmin(admin.ModelAdmin):
     list_filter = ['customer_food']
     search_fields = ['customer_food']
 admin.site.register(food_diet_user,food_diet_userAdmin)
+
+class food_diet_adminAdmin(admin.ModelAdmin):
+    fields = ['admin_food','food_field_admin','mesure_food_admin']
+    list_filter = ['admin_food']
+    search_fields = ['admin_food']
+admin.site.register(food_diet_admin,food_diet_adminAdmin)
