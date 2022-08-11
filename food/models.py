@@ -1,5 +1,3 @@
-from operator import mod
-from statistics import mode
 from django.db import models
 from customer.models import customer
 # Create your models here.
@@ -18,3 +16,11 @@ class food_diet_user(models.Model):
 
     def __str__(self) -> str:
         return f'{self.food_field},{self.mesure_food_customer}'
+
+class food_diet_admin(models.Model):
+    admin_food = models.ForeignKey(customer, on_delete=models.RESTRICT)
+    food_field_admin = models.ForeignKey(food,on_delete=models.RESTRICT)
+    mesure_food_admin = models.IntegerField()
+
+    def __str__(self) -> str:
+        return f'{self.food_field_admin},{self.mesure_food_admin}'
