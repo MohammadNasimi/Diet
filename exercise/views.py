@@ -4,10 +4,10 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import is_valid_path
 from exercise.serializers import exerciseSerializers
-from exercise.models import exercise ,exercise_diet_user
+from exercise.models import exercise ,exercise_diet_user,exercise_diet_admin
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import decorators , response ,generics
-from exercise.serializers import exerciseSerializers,exercise_dietSerializers
+from exercise.serializers import exerciseSerializers,exercise_dietSerializers,exercise_diet_adminSerializers
 # Create your views here.
 @csrf_exempt
 @decorators.api_view(['GET','POST'])
@@ -29,4 +29,6 @@ class exercise_diet_api(generics.ListCreateAPIView):
     serializer_class = exercise_dietSerializers
     queryset = exercise_diet_user.objects.all()
 
-
+class exercise_diet_admin_api(generics.ListCreateAPIView):
+    serializer_class = exercise_diet_adminSerializers
+    queryset = exercise_diet_admin.objects.all()
