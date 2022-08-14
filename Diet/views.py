@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics,response
 from Diet.models import Diet,Diet_admin
 from Diet.calculate_diet import calculate
+from Diet.models import Diet,Diet_admin
 # Create your views here.
 from Diet.serializers import DietSerializers,Diet_adminSerializers
 class DietApi(generics.ListCreateAPIView):  
@@ -16,7 +17,25 @@ class DietApi(generics.ListCreateAPIView):
 
 
         Diet_data = request.data
-        print(calculate(Diet_data))
+        cal = calculate(Diet_data)
+        
+
+        obj_diet = Diet.objects.create(user=cal[0])
+        obj_diet.food_Diet.set(cal[3])
+        obj_diet.exercise_Diet.set(cal[4])
+        obj_diet_admin = Diet_admin.objects.create(user_admin=cal[0])
+        obj_diet_admin.food_Diet_admin.set(cal[1])
+        obj_diet_admin.exercise_Diet_admin.set(cal[2])
+
+        # food_Diet = []
+        # food_diet_users = request.data.pop('food_Diet')
+
+        # # food_diet_users = request.data.pop()
+        # request.data.update({'food_Diet':food_Diet})
+        # serializer = self.get_serializer(data=request.data)
+        # serializer.is_valid(raise_exception=True)
+        # self.perform_create(serializer)
+        # headers = self.get_success_headers(serializer.data)
         return response.Response(serializer.data,status = 200)
 
 
