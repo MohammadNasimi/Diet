@@ -42,7 +42,7 @@ class DietApi(generics.ListCreateAPIView):
         return response.Response(serializer.data,status = 200)
 
 
-class Diet_adminApi(generics.ListAPIView):  
+class Diet_adminApi(generics.ListCreateAPIView):  
 
     serializer_class = Diet_adminSerializers
     # queryset = Diet_admin.objects.all()
