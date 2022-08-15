@@ -70,7 +70,6 @@ def calculate(diet_data):
     calculate_admin_calories = mesure_all_foods - mesure_all_exercises
 
     if calculate_admin_calories > 0 :
-        print(1)
         exercise_id = random.randint(1,exercises_count)
         exersise_field_admin = exercise.objects.get(id = exercise_id)
         admin_exercise = customer_diet
@@ -80,7 +79,6 @@ def calculate(diet_data):
                                 exersise_field_admin=exersise_field_admin,time_exercise_admin=time_exercise_admin)
         exercise_diet_admin_id.append(exercise_diet_admin_get.id)
     elif calculate_admin_calories< 0:
-        print(-1)
         food_id = random.randint(1,foods_count)
         food_admin = food.objects.get(id = food_id)
         user_admin = customer_diet
@@ -94,4 +92,27 @@ def calculate(diet_data):
 
     calculate_admin_calories = mesure_all_foods - mesure_all_exercises
     
-    return [customer_diet,food_diet_admin_id,exercise_diet_admin_id,food_diet_user_id,exercise_diet_user_id]
+
+    ##################################kind_diet#######################################
+    if diet_data['kind_diet'] == "1" :
+        exercise_id = random.randint(1,exercises_count)
+        exersise_field_admin = exercise.objects.get(id = exercise_id)
+        admin_exercise = customer_diet
+        time_exercise_admin = random.randint(5,50)
+
+        exercise_diet_admin_get =exercise_diet_admin.objects.create(admin_exercise=admin_exercise,
+                                exersise_field_admin=exersise_field_admin,time_exercise_admin=time_exercise_admin)
+        
+        exercise_diet_admin_id.append(exercise_diet_admin_get.id) 
+    elif diet_data['kind_diet'] == "3":
+        food_id = random.randint(1,foods_count)
+        food_admin = food.objects.get(id = food_id)
+        user_admin = customer_diet
+        mesure_food_admin = random.randint(5,50)
+        ##################################
+        mesure_all_foods = mesure_all_foods +(food_admin.calories*mesure_food_admin)/food_admin.mesure
+        food_diet_admin_get =food_diet_admin.objects.create(admin_food=user_admin,food_field_admin=food_admin,
+                                        mesure_food_admin=mesure_food_admin)
+
+    return [customer_diet,food_diet_admin_id,exercise_diet_admin_id,food_diet_user_id,
+            exercise_diet_user_id,diet_data['kind_diet']]
