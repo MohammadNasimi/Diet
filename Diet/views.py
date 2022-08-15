@@ -19,10 +19,13 @@ class DietApi(generics.ListCreateAPIView):
         Diet_data = request.data
         cal = calculate(Diet_data)
         
-
+        print(cal[5])
+        print(type(cal[5]))
         obj_diet = Diet.objects.create(user=cal[0])
         obj_diet.food_Diet.set(cal[3])
         obj_diet.exercise_Diet.set(cal[4])
+        obj_diet.kind_diet = cal[5]
+        obj_diet.save()
         obj_diet_admin = Diet_admin.objects.create(user_admin=cal[0])
         obj_diet_admin.food_Diet_admin.set(cal[1])
         obj_diet_admin.exercise_Diet_admin.set(cal[2])
