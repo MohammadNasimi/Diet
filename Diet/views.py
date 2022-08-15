@@ -39,7 +39,9 @@ class DietApi(generics.ListCreateAPIView):
         return response.Response(serializer.data,status = 200)
 
 
-class Diet_adminApi(generics.ListCreateAPIView):  
+class Diet_adminApi(generics.ListAPIView):  
 
     serializer_class = Diet_adminSerializers
-    queryset = Diet_admin.objects.all()
+    # queryset = Diet_admin.objects.all()
+    def get_queryset(self):
+        return Diet_admin.objects.filter(user_admin=self.kwargs['customer_id'])
