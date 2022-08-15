@@ -9,7 +9,7 @@ class DietSerializers(serializers.ModelSerializer):
     exercise_Diet=exercise_dietSerializers(many =True)
     class Meta:
         model= Diet
-        fields = ['user','food_Diet','exercise_Diet']
+        fields = ['user','food_Diet','exercise_Diet','kind_diet']
         
     # def get_accounts_items(self, obj):
     #     customer_account_query = food.objects.filter(obj.id)
