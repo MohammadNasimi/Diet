@@ -1,5 +1,9 @@
+import re
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
+import jwt
+from datetime  import datetime, timedelta
+from django.conf import settings
 # Create your models here.
 CHOICES = (
     ("1", "admin"),
@@ -18,3 +22,9 @@ class User(AbstractUser):
 
     objects = MyUserManager()
 
+    @property
+    def  token(self):
+        token = jwt.encode({'username':self.username , 'exp':datetime.utcnow() + timedelta(hours = 20)},
+                                settings.SECRET_KEY,algorithm='HS256')
+
+        return token
