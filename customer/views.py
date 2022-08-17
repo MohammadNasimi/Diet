@@ -1,6 +1,7 @@
-from customer.serializers import customerSerializers
+from customer.serializers import customerSerializers,loginserializers
 from customer .models import customer
 from core.models import User
+from django.contrib.auth import authenticate
 # Create your views here.
 from rest_framework import generics , response
 from django.contrib.auth import get_user_model
@@ -36,3 +37,22 @@ class customerAPI(generics.ListCreateAPIView):
 
 
         return response.Response(serializer.data,status = 200)
+
+
+class LoginApi(generics.GenericAPIView):
+    serializer_class = loginserializers
+    def post(self,request):
+        username = request.data.get('username',None)
+        password = request.data.get('password',None)
+
+        user = authenticate (username =username,password =password)
+
+        if user :
+            serializer =self.serializer_class(user)
+            request.session['uid'] = user.id
+            return response.Response(serializer.data , status = 200 )
+        return response.Response({'message: invalid connection '} , status = 200 )
+
+
+
+
