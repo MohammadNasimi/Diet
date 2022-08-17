@@ -13,12 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-import imp
+from django.urls import path
+from rest_framework_simplejwt import views as jwt_views
 from django.contrib import admin
 from django.urls import path
 from exercise.views import exercise_api, exercise_diet_admin_api,exercise_diet_api,exercise_diet_adminSerializers
 from food.views import foodAPI ,food_diet_userApi,food_diet_adminApi
-from customer.views import customerAPI
+from customer.views import customerAPI,LoginApi
 from Diet.views import DietApi,Diet_adminApi
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,5 +31,9 @@ urlpatterns = [
     path('food_diet_user',food_diet_userApi.as_view(),name = 'food_diet_user'),
     path('food_diet_admin',food_diet_adminApi.as_view(),name ='food_diet_admin'),
     path('exercise_diet_admin',exercise_diet_admin_api.as_view(),name = 'exerciser_diet_admin'),
-    path('Diet_adminApi/<int:customer_id>/',Diet_adminApi.as_view(),name='Diet_adminApi')
+    path('Diet_adminApi/<int:customer_id>/',Diet_adminApi.as_view(),name='Diet_adminApi'),
+    path('LoginApi',LoginApi.as_view(),name='LoginApi'),
+    #jwt
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh')
 ]
