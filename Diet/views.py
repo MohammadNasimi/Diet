@@ -3,12 +3,9 @@ from rest_framework import generics,response
 from Diet.models import Diet,Diet_admin
 from Diet.calculate_diet import calculate
 from Diet.models import Diet,Diet_admin
-from rest_framework.permissions import IsAuthenticated
-
 # Create your views here.
 from Diet.serializers import DietSerializers,Diet_adminSerializers
 class DietApi(generics.ListCreateAPIView):  
-    permission_classes = (IsAuthenticated,)
 
     serializer_class = DietSerializers
     queryset = Diet.objects.all()
@@ -21,9 +18,7 @@ class DietApi(generics.ListCreateAPIView):
 
         Diet_data = request.data
         cal = calculate(Diet_data)
-        
-        print(cal[5])
-        print(type(cal[5]))
+
         obj_diet = Diet.objects.create(user=cal[0])
         obj_diet.food_Diet.set(cal[3])
         obj_diet.exercise_Diet.set(cal[4])
