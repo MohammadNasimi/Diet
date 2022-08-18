@@ -31,7 +31,7 @@ urlpatterns = [
     path('food_diet_user',food_diet_userApi.as_view(),name = 'food_diet_user'),
     path('food_diet_admin',food_diet_adminApi.as_view(),name ='food_diet_admin'),
     path('exercise_diet_admin',exercise_diet_admin_api.as_view(),name = 'exerciser_diet_admin'),
-    path('Diet_adminApi/<int:customer_id>/',Diet_adminApi.as_view(),name='Diet_adminApi'),
+    path('Diet_adminApi',Diet_adminApi.as_view(),name='Diet_adminApi'),
     path('LoginApi',LoginApi.as_view(),name='LoginApi'),
     #jwt
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
