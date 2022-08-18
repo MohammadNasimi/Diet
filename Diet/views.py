@@ -46,4 +46,12 @@ class Diet_adminApi(generics.ListCreateAPIView):
     serializer_class = Diet_adminSerializers
     # queryset = Diet_admin.objects.all()
     def get_queryset(self):
-        return Diet_admin.objects.filter(user_admin=self.kwargs['customer_id'])
+        user = self.request.user
+        print(user)
+        if user.kind_user == '1':
+            customer_id = self.request.GET.get('customer')
+            print(customer_id)
+
+        else:
+            customer_id = user.id
+        return Diet_admin.objects.filter(user_admin=customer_id)
