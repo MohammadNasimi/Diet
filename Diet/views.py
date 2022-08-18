@@ -1,12 +1,13 @@
 from django.shortcuts import render
-from rest_framework import generics,response
+from rest_framework import generics,response,permissions
 from Diet.models import Diet,Diet_admin
 from Diet.calculate_diet import calculate
 from Diet.models import Diet,Diet_admin
+from Diet.permissions import custompermissions ,custompermissionsDiet_admin
 # Create your views here.
 from Diet.serializers import DietSerializers,Diet_adminSerializers
 class DietApi(generics.ListCreateAPIView):  
-
+    permission_classes = [ custompermissions ]
     serializer_class = DietSerializers
     queryset = Diet.objects.all()
 
@@ -41,7 +42,7 @@ class DietApi(generics.ListCreateAPIView):
 
 
 class Diet_adminApi(generics.ListCreateAPIView):  
-
+    permission_classes = [ custompermissionsDiet_admin ]
     serializer_class = Diet_adminSerializers
     # queryset = Diet_admin.objects.all()
     def get_queryset(self):
