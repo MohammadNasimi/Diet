@@ -23,7 +23,7 @@ from customer.views import customerAPI,LoginApi
 from Diet.views import DietApi,Diet_adminApi
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('exercise_api/',exercise_api,name= 'exercise_api'),
+    path('exercise_api/',exercise_api.as_view(),name= 'exercise_api'),
     path('food_api/',foodAPI.as_view(),name= 'food_api'),
     path('customer_api/',customerAPI.as_view(),name= 'customer_api'),
     path('diet_api',DietApi.as_view(),name = 'diet_api'),
