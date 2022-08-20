@@ -4,12 +4,25 @@ from Diet.models import Diet,Diet_admin
 from Diet.calculate_diet import calculate
 from Diet.models import Diet,Diet_admin
 from Diet.permissions import custompermissions ,custompermissionsDiet_admin
+from customer.models import customer
+from core.models import User
 # Create your views here.
 from Diet.serializers import DietSerializers,Diet_adminSerializers
 class DietApi(generics.ListCreateAPIView):  
     permission_classes = [ custompermissions ]
     serializer_class = DietSerializers
-    queryset = Diet.objects.all()
+    def get_queryset(self):
+        user = self.request.user
+        if user.kind_user == '1':
+            customer_id = self.request.GET.get('customer')
+            return Diet.objects.filter(user=customer_id)
+        else:
+            customer_id = user.id
+            customer__all = customer.objects.all()
+            for customer__ in customer__all:
+                if customer__.user.id == customer_id:
+                    customer__id = customer__.id
+            return Diet.objects.filter(user=customer__id)
 
     def post(self, request, *args, **kwargs):
     
@@ -20,7 +33,7 @@ class DietApi(generics.ListCreateAPIView):
         Diet_data = request.data
         cal = calculate(Diet_data)
 
-        obj_diet = Diet.objects.create(user=cal[0])
+        obj_diet = Diet.objects.create(user=self.request.user)
         obj_diet.food_Diet.set(cal[3])
         obj_diet.exercise_Diet.set(cal[4])
         obj_diet.kind_diet = cal[5]
@@ -47,11 +60,13 @@ class Diet_adminApi(generics.ListCreateAPIView):
     # queryset = Diet_admin.objects.all()
     def get_queryset(self):
         user = self.request.user
-        print(user)
         if user.kind_user == '1':
             customer_id = self.request.GET.get('customer')
-            print(customer_id)
 
         else:
             customer_id = user.id
-        return Diet_admin.objects.filter(user_admin=customer_id)
+            customer__all = customer.objects.all()
+            for customer__ in customer__all:
+                if customer__.user.id == customer_id:
+                    customer__id = customer__.id
+        return Diet_admin.objects.filter(user_admin=customer__id)
